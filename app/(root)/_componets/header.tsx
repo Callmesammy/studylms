@@ -69,7 +69,7 @@ const Headers = () => {
     )
     },[])
     return ( 
-        <div className="w-full h-[5rem] bg-white flex shadow-sm">
+        <div className="w-full h-[5rem] bg-white flex shadow-sm sticky">
             <div className="w-full h-full items-center flex px-2 justify-between">
             <div onClick={()=>clicking("/")} className="flex gap-1 items-center cursor-pointer hover:scale-105">
             <Image src="/study.avif" alt="logo" width={50} height={50} className="rounded-md shadow press"/>

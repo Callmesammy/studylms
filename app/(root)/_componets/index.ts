@@ -1,3 +1,4 @@
+import { icons } from "lucide-react"
 
 export const courses =[
     {
@@ -38,3 +39,5 @@ export const courses =[
 
 
 ]
+
+
