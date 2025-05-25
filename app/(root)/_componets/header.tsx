@@ -74,12 +74,15 @@ const Headers = () => {
             <Image src="/study.avif" alt="logo" width={50} height={50} className="rounded-md shadow press"/>
            <div className={pacifico.className}> <h1 className="twist">StusyLMS </h1> </div> 
             </div>
-            <div className="gap-3 flex">
+            <div className="gap-3 hidden lg:flex ">
             {Headstcky.map((doc, keys)=>{
                 const isActive = pathName===doc.url || pathName.startsWith(`${doc.url}/`)
                 return(
-                    <Link href={doc.url} key={keys} className={cn("space-x-2 text-md font-semibold hover:text-blue-400 ", isActive && "text-blue-600 font-bold")} >
-                        {doc.name}
+                    <Link href={doc.url} key={keys} className={cn("hover:scale-100  bg-black  z-50 relative space-x-2 text-md font-semibold hover:text-blue-400 p-3 border rounded-full", isActive && "text-blue-800 font-bold top-2 bg-green-400")} >
+                {doc.name}
+   <div className=" -z-10 bg-secondary absolute flex w-full h-full rounded-full items-center justify-center -top-1 left-0 "/>
+
+
                     </Link>
                 )
             })}
