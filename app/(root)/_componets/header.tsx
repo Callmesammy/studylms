@@ -8,13 +8,14 @@ import gsap from "gsap";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { SheetSide } from "./sidebar";
 
 const pacifico = Pacifico({    
      weight: '400',
     subsets: ["latin"],
 });
 
-const Headstcky=[
+export const Headstcky=[
     {
         name: "Home", 
         url: "/"
@@ -73,6 +74,9 @@ const Headers = () => {
             <div onClick={()=>clicking("/")} className="flex gap-1 items-center cursor-pointer hover:scale-105">
             <Image src="/study.avif" alt="logo" width={50} height={50} className="rounded-md shadow press"/>
            <div className={pacifico.className}> <h1 className="twist">StusyLMS </h1> </div> 
+            </div>
+            <div className="lg:hidden">
+                <SheetSide/>
             </div>
             <div className="gap-3 hidden lg:flex ">
             {Headstcky.map((doc, keys)=>{
