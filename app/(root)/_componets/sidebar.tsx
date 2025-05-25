@@ -28,7 +28,7 @@ export function SheetSide() {
 return (
     <div className="w-full h-full ">
       {SHEET_SIDES.map((side) => (
-        <Sheet key={side} open={onEnter} onOpenChange={()=>setOnEnter(true)} >
+        <Sheet key={side} open={onEnter} onOpenChange={setOnEnter} >
           <SheetTrigger asChild>
             <Button variant="outline">
          <GoSidebarExpand />

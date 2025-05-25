@@ -8,12 +8,12 @@ import { IoTimerOutline } from "react-icons/io5";
 
 export default function Home() {
   return (
-    <div className="w-full h-full flex pt-3 px-3 mb-3 overflow-auto"> 
+    <div className="w-full h-full flex pt-3 px-3 mb-3 "> 
     <div className="flex w-full h-full flex-col">
        <h1 className="text-2xl font-bold">Dashboard</h1>
  <div className="grid md:grid-cols-2 lg:grid-cols-3 w-full h-full lg:h-[17rem] gap-2 p-4 ">
         {courses.map((doc)=>(
-          <div key={doc.id} className={`"flex border border-black rounded-lg " ${doc.colour}`}>
+          <div key={doc.id} className={`"flex border border-black rounded-lg px-3 " ${doc.colour}`}>
             <div className="justify-between w-full px-4 pt-6 flex ">
               <span className="bg-black text-white text-sm p-2 rounded">{doc.course}</span>
 
@@ -28,7 +28,11 @@ export default function Home() {
             <h1 className="text-sm">{doc.time} {doc.duration}</h1>
             </div>
             </div>
-            <Link href={`/course${doc.id}`} onClick={doc.lunch} className=" px-4 w-full bg-red-500">Launch Lesson</Link>
+            <div className="pt-5">
+            <Link href={`/course${doc.id}`} onClick={doc.lunch} className=" px-4 w-full bg-red-500 p-2 flex items-center rounded-md text-center hover:bg-red-700 justify-center text-md font-semibold text-white">Launch Lesson</Link>
+
+
+            </div>
           </div>
         ))}
       </div>
