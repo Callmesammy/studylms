@@ -23,13 +23,14 @@ import {
   } from "@/components/ui/select"
 import { useState } from "react"
 import Image from "next/image"
-   
+import { CiImageOn } from "react-icons/ci";
+
 const formSchema = z.object({
   username: z.string().min(2).max(50),
 })
 
 const Register = ()=>{
-    const [showImage, setShowImage] = useState <string | null>(null)
+  const [preView, setpreView] = useState<string | null>(null)
 
       // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,42 +48,31 @@ const Register = ()=>{
   }
 
     return(
-        <div className="flex w-full h-full items-center justify-center ">
-            <div className="flex w-full h-full justify-center items-center ">
-                            Register a course 
+        <div className="flex w-full h-full items-center justify-center bg-white">
+            <div className="flex w-full h-full justify-center items-center flex-col ">
+                         <h1 className="text-2xl font-bold">  Register a course  </h1>  
      <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex gap-2">
-            {showImage && (
-                <Image src={showImage}
-                alt="image" width={80} height={80}
-                onClick={()=> window.open(showImage, "_blank")}
-                />
-            )}
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-[20rem]">
+        <div className="flex pt-4 space-x-3">
+          <div className="border w-32 rounded ">
+          <CiImageOn className="size-22"/>
 
-        </div>
-      <FormField
+          </div>
+        <FormField
           control={form.control}
           name="image"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Companion icon</FormLabel>
               <FormControl>
-                <Input type="file"  placeholder="image" {...field} 
-                    onChange={(e)=>{
-                        const url = e.target.files?.[0]
-                        if(url){
-                            const file = URL.createObjectURL(url)
-                            setShowImage(file)
-                            field.onChange(showImage)
-                        }
-                    }}
-                />
+                <Input type="file"   placeholder="image" {...field}  />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+        </div>
+      
         <FormField
           control={form.control}
           name="username"
@@ -90,9 +80,8 @@ const Register = ()=>{
             <FormItem>
               <FormLabel>Companion name</FormLabel>
               <FormControl>
-                <Input type="image" placeholder="shadcn" {...field} className="h-42 object-contain"/>
+                <Input placeholder="shadcn" {...field} className=""/>
               </FormControl>
-             
               <FormMessage />
             </FormItem>
           )}
@@ -146,9 +135,6 @@ const Register = ()=>{
                   <SelectItem value="m@support.com">m@support.com</SelectItem>
                 </SelectContent>
               </Select>
-              <FormDescription>
-                You can manage email addresses in your{" "}
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -171,9 +157,6 @@ const Register = ()=>{
                   <SelectItem value="m@support.com">m@support.com</SelectItem>
                 </SelectContent>
               </Select>
-              <FormDescription>
-                You can manage email addresses in your{" "}
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -196,9 +179,6 @@ const Register = ()=>{
                   <SelectItem value="m@support.com">m@support.com</SelectItem>
                 </SelectContent>
               </Select>
-              <FormDescription>
-                You can manage email addresses in your{" "}
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
