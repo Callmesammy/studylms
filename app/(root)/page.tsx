@@ -9,7 +9,7 @@ import { FaCalculator } from "react-icons/fa";
 import { PiChatsTeardropDuotone } from "react-icons/pi";
 import { MdOutlineComputer } from "react-icons/md";
 import { GiNotebook } from "react-icons/gi";
-import { Button } from "@/components/ui/button";
+import { GoPlus } from "react-icons/go";
 
 
 
@@ -108,12 +108,15 @@ export default function Home() {
       </div>
       
      <div className="grid md:grid-cols-2 gap-2 w-full h-full">
-     <div className="w-full relative h-full justify-center  border rounded-2xl bg-black text-white ">
+     <div className="w-full lg:w-[40rem] relative h-full justify-center  border rounded-full bg-black text-white ">
          <div className="w-full absolute h-full bg-orange-300/10 flex"/>
          <div className="flex items-center z-10 w-full h-full justify-center flex-col space-y-2">
           <Link href={"/course"} className="p-2 z-30 rounded text-sm bg-orange-800 hover:bg-orange-400 cursor-pointer">Start learning your way</Link>
           <h1 className="text-md font-semibold text-2xl">Build a Personalize <br/>  learning companion</h1>
-          <p className="px-4 text-muted-foreground text-sm text-center">pick a name, subject, voice & personality and start learning through voice conversations that feel natural and fun </p>
+          <p className="px-4 text-muted-foreground text-sm text-center">pick a name, subject, voice & personality and start learning through <br/> voice conversations that feel natural and fun </p>
+          <Image src="/305.jpg" alt="pic" width={170} height={105} className="object-contain rounded-full flex"/>
+          <Link href={"/course"} className="p-2 z-30 rounded text-sm bg-sky-800 hover:bg-sky-400 cursor-pointer text-center  px-auto text-center w-[13rem] flex gap-1 items-center justify-center"> <GoPlus /> Build New Companion</Link>
+
           </div>
          </div>
         <div className="border p-2 rounded-md w-full lg:w-[43rem] ">
