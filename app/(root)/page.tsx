@@ -9,6 +9,7 @@ import { FaCalculator } from "react-icons/fa";
 import { PiChatsTeardropDuotone } from "react-icons/pi";
 import { MdOutlineComputer } from "react-icons/md";
 import { GiNotebook } from "react-icons/gi";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -106,15 +107,23 @@ export default function Home() {
         ))}
       </div>
       
-     <div className="grid lg:grid-cols-2 gap-3  ">
-        <div className="border p-2 rounded-md w-full ">
+     <div className="grid md:grid-cols-2 gap-2 w-full h-full">
+     <div className="w-full relative h-full justify-center  border rounded-2xl bg-black text-white ">
+         <div className="w-full absolute h-full bg-orange-300/10 flex"/>
+         <div className="flex items-center z-10 w-full h-full justify-center flex-col space-y-2">
+          <Link href={"/course"} className="p-2 z-30 rounded text-sm bg-orange-800 hover:bg-orange-400 cursor-pointer">Start learning your way</Link>
+          <h1 className="text-md font-semibold text-2xl">Build a Personalize <br/>  learning companion</h1>
+          <p className="px-4 text-muted-foreground text-sm text-center">pick a name, subject, voice & personality and start learning through voice conversations that feel natural and fun </p>
+          </div>
+         </div>
+        <div className="border p-2 rounded-md w-full lg:w-[43rem] ">
           <h1 className="text-md font-bold">Recently Completed Lessons</h1>
           <div className="w-full justify-between h-full   ">
            <span className="space-y-3 pt-3 w-full flex flex-col justify-between">
-           <div className="flex w-full justify-between px-2">
+           <div className="flex w-full justify-between px-3">
            <h1 className="text-sm text-muted-foreground">Lessons</h1>
            <span className="flex gap-4">
-             <h1 className="text-sm text-muted-foreground">Subjects</h1>
+             <h1 className="text-sm text-muted-foreground ">Subjects</h1>
              <h1 className="text-sm text-muted-foreground hidden md:flex">Duration</h1>
 
            </span>
@@ -124,9 +133,9 @@ export default function Home() {
             {anotherCourse.map((dt)=>{
 
               return(
-                <Link href={`/course${dt.id}`} key={dt.id} className="w-full flex gap-2 hover:bg-sky-200  ">
-                   <span className={`"flex p-3 rounded bg w-full" ${dt.colour}`}> {dt.icon} </span> 
-                  <div className="w-full flex justify-between gap-10">
+                <Link href={`/course${dt.id}`} key={dt.id} className="w-full flex gap-2 hover:bg-sky-200  space-y-2 items-center">
+                   <span className={`"flex p-2 rounded bg w-full" ${dt.colour}`}> {dt.icon} </span> 
+                  <div className="w-full flex justify-between gap-5">
                     <span className="flex flex-col w-full ">
                         <h1 className="font-semibold">{dt.name} </h1>
                       <h2 className=" text-sm">Topic: {dt.topic}</h2>
@@ -134,11 +143,11 @@ export default function Home() {
                   
 
                     </div>
-                    <span className="flex gap-2 w-full justify-end ">
-                    <span className="p-2 border rounded-full items-center flex text-sm text-white bg-black font-semibold text-end">
+                    <span className="flex gap-2 w- justify-center ">
+                    <span className="p-2 border rounded-full w-full items-center  text-sm text-white bg-black font-semibold text-end">
                       {dt.course}
                     </span>
-                    <span className="p-2  hidden md:flex rounded-full items-center text-sm font-semibold text-end">
+                    <span className="p-1 w-full  hidden md:flex rounded-full items-center text-sm font-semibold text-end">
                       {dt.time} mins
                     </span>
                     </span>
@@ -150,10 +159,7 @@ export default function Home() {
            
           </div>
         </div>
-       <div className="w-full lg:w-[50rem] h-full bg-black rounded-md">
-
         
-      </div>
       </div> 
      
       </div> 
