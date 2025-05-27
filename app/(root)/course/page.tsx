@@ -28,9 +28,28 @@ import { CiImageOn } from "react-icons/ci";
 import Image from "next/image"
 
 const formSchema = z.object({
-  username: z.string().min(2).max(50),
+  icon: z.string().min(1 ,{
+    message: "pic an image"
+  }),
+  name: z.string().min(4 ,{
+    message: "Enter name"
+  }),
+  subject: z.string().min(1 ,{
+    message: "pic an image"
+  }),
+  learn: z.string().min(1 ,{
+    message: "pic an image"
+  }),
+  mins: z.coerce.number().min(1 ,{
+    message: "pic an image"
+  }),
+  course: z.string().min(1 ,{
+    message: "pic an image"
+  }), 
+   style: z.string().min(1 ,{
+    message: "pic an image"
+  }),
 })
-
 const Register = () => {
   const [showImage, setshowImage] = useState<string | null>(null)
 
@@ -38,7 +57,7 @@ const Register = () => {
     const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        username: "",
+        icon: "",
       },
     })
    
@@ -133,20 +152,20 @@ const Register = () => {
 
 <FormField
           control={form.control}
-          name="email"
+          name="course"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Subjects</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select course" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+                  <SelectItem value="costing">Cost Accounting</SelectItem>
+                  <SelectItem value="accounting">Financial Accounting</SelectItem>
+                  <SelectItem value="management">Management Account</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -156,7 +175,7 @@ const Register = () => {
 
          <FormField
           control={form.control}
-          name="email"
+          name="style"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Speaking style</FormLabel>
@@ -167,7 +186,7 @@ const Register = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="casual">Casua</SelectItem>
+                  <SelectItem value="casual">English</SelectItem>
                   <SelectItem value="spanish">Spanish</SelectItem>
                   <SelectItem value="french">French</SelectItem>
                 </SelectContent>
@@ -176,24 +195,15 @@ const Register = () => {
             </FormItem>
           )}
         />
-         <FormField
+          <FormField
           control={form.control}
-          name="email"
+          name="mins"
           render={({ field }) => (
-            <FormItem >
-              <FormLabel>Language</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value} >
-                <FormControl >
-                  <SelectTrigger >
-                    <SelectValue placeholder="Select Language" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                <SelectItem value="english">English</SelectItem>
-                  <SelectItem value="spanish">Spanish</SelectItem>
-                  <SelectItem value="french">French</SelectItem>
-                </SelectContent>
-              </Select>
+            <FormItem>
+              <FormLabel>how many minutes</FormLabel>
+              <FormControl>
+                <Input type="number" placeholder="how many minutes" {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
