@@ -1,8 +1,9 @@
-
 "use client"
+ 
+import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -13,128 +14,118 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select"
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+ 
+import { Input } from "@/components/ui/input"
 import { useState } from "react"
-import Image from "next/image"
 import { CiImageOn } from "react-icons/ci";
+import Image from "next/image"
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
 })
 
-const Register = ()=>{
-  const [preView, setpreView] = useState<string | null>(null)
+const Register = () => {
+  const [showImage, setshowImage] = useState<string | null>(null)
 
-      // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-    },
-  })
- 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
-  }
+    // 1. Define your form.
+    const form = useForm<z.infer<typeof formSchema>>({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        username: "",
+      },
+    })
+   
+    // 2. Define a submit handler.
+    function onSubmit(values: z.infer<typeof formSchema>) {
+      // Do something with the form values.
+      // ✅ This will be type-safe and validated.
+      console.log(values)
+    }
 
-    return(
-        <div className="flex w-full h-full items-center justify-center bg-white">
-            <div className="flex w-full h-full justify-center items-center flex-col ">
-                         <h1 className="text-2xl font-bold">  Register a course  </h1>  
-     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-[20rem]">
-        <div className="flex pt-4 space-x-3">
-          <div className="border w-32 rounded ">
-          <CiImageOn className="size-22"/>
+  return (  
+    <div className="w-full pt-3 shadow-md flex-col space-y-3 flex border rounded-md bg-white p-2 items-center justify-center h-screen">
+      <h1 className="font-semibold text-xl capitalize">Register a course </h1>
 
+      
+
+      <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-[26rem]">
+      <div className="flex gap-3 w-full items-center">  
+        {showImage? (
+          <div className="w-[6rem] h-[5rem] rounded-md border flex relative items-center justify-center">
+              <Image src={showImage} alt="showImage" fill className="object-contain" onChange={()=> window.open(showImage)}/>
           </div>
-        <FormField
+        ):(
+          <div className="w-[6rem] h-[5rem] rounded-md border flex items-center justify-center">
+            <CiImageOn className="size-10 text-muted-foreground" />
+          </div>
+        )}    
+      <FormField
           control={form.control}
-          name="image"
+          name="icon"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Companion icon</FormLabel>
+              <FormLabel>Compannion icon</FormLabel>
               <FormControl>
-                <Input type="file"   placeholder="image" {...field}  />
+                <Input accept="image/*" type="file" placeholder="shadcn" 
+                  onChange={(e)=>{
+                    const file = e.target.files?.[0]
+                    if (file){
+                      const url = URL.createObjectURL(file)
+                      setshowImage(url)
+                      field.onChange(file)
+                    }
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        </div>
-      
-        <FormField
+</div>
+       
+          <FormField
           control={form.control}
-          name="username"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Companion name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} className=""/>
+                <Input placeholder="Enter companion name eg. Smartestking" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
-<FormField
+          <FormField
           control={form.control}
-          name="username"
+          name="subject"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Subject</FormLabel>
               <FormControl>
-                <Input placeholder="Enter subject, eg. Accounting" {...field} />
+                <Input placeholder="Enter Subject eg. Accounting" {...field} />
               </FormControl>
-             
               <FormMessage />
             </FormItem>
           )}
         />
-
-<FormField
+          <FormField
           control={form.control}
-          name="username"
+          name="learn"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What do you want to learn? </FormLabel>
+              <FormLabel>What do you want to learn?</FormLabel>
               <FormControl>
-                <Input placeholder="Enter the topic you want to learn" {...field} />
+                <Input placeholder="What are you willing to learn" {...field} />
               </FormControl>
-             
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-
-<FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Voice Type </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
               <FormMessage />
             </FormItem>
           )}
@@ -145,7 +136,7 @@ const Register = ()=>{
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Speaking Style</FormLabel>
+              <FormLabel>Email</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -154,6 +145,7 @@ const Register = ()=>{
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="m@example.com">m@example.com</SelectItem>
+                  <SelectItem value="m@google.com">m@google.com</SelectItem>
                   <SelectItem value="m@support.com">m@support.com</SelectItem>
                 </SelectContent>
               </Select>
@@ -162,34 +154,55 @@ const Register = ()=>{
           )}
         />
 
-<FormField
+         <FormField
           control={form.control}
-          name="language"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Language </FormLabel>
+              <FormLabel>Speaking style</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select your speaking styke" className="w- flex flex-col w-[16rem]"/>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+                  <SelectItem value="casual">Casua</SelectItem>
+                  <SelectItem value="spanish">Spanish</SelectItem>
+                  <SelectItem value="french">French</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full text-sm bg-sky-700 hover:bg-sky-500">Build Companion</Button>
+         <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem >
+              <FormLabel>Language</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value} >
+                <FormControl >
+                  <SelectTrigger >
+                    <SelectValue placeholder="Select Language" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                <SelectItem value="english">English</SelectItem>
+                  <SelectItem value="spanish">Spanish</SelectItem>
+                  <SelectItem value="french">French</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="bg-sky-900 hover:bg-sky-400 w-full cursor-pointer">Register Companion</Button>
       </form>
     </Form>
-
-        </div> 
-        </div>
-    )
+    </div>
+  );
 }
-
-export default Register; 
+ 
+export default Register;
