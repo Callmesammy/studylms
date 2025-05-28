@@ -115,7 +115,7 @@ export default function Home() {
           <h1 className="text-md font-semibold text-2xl">Build a Personalize <br/>  learning companion</h1>
           <p className="px-4 text-muted-foreground text-sm text-center">pick a name, subject, voice & personality and start learning through <br/> voice conversations that feel natural and fun </p>
           <Image src="/305.jpg" alt="pic" width={170} height={105} className="object-contain rounded-full flex"/>
-          <Link href={"/course"} className="p-2 z-30 rounded text-sm bg-sky-800 hover:bg-sky-400 cursor-pointer text-center  px-auto text-center w-[13rem] flex gap-1 items-center justify-center"> <GoPlus /> Build New Companion</Link>
+          <Link href={"/course"} className="p-2 z-30 rounded text-sm bg-sky-800 hover:bg-sky-400 cursor-pointer  px-auto text-center w-[13rem] flex gap-1 items-center justify-center"> <GoPlus /> Build New Companion</Link>
 
           </div>
          </div>

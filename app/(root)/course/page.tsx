@@ -26,16 +26,12 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { CiImageOn } from "react-icons/ci";
 import Image from "next/image"
+import { Loader2 } from "lucide-react"
 
 const formSchema = z.object({
-  icon: z.string().min(1 ,{
-    message: "pic an image"
-  }),
+  icon: z.object({}),
   name: z.string().min(4 ,{
     message: "Enter name"
-  }),
-  subject: z.string().min(1 ,{
-    message: "pic an image"
   }),
   learn: z.string().min(1 ,{
     message: "pic an image"
@@ -51,6 +47,7 @@ const formSchema = z.object({
   }),
 })
 const Register = () => {
+  const [loading, setLoading] = useState(false)
   const [showImage, setshowImage] = useState<string | null>(null)
 
     // 1. Define your form.
@@ -63,6 +60,7 @@ const Register = () => {
    
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true)
       // Do something with the form values.
       // ✅ This will be type-safe and validated.
       console.log(values)
@@ -117,25 +115,13 @@ const Register = () => {
             <FormItem>
               <FormLabel>Companion name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter companion name eg. Smartestking" {...field} />
+                <Input placeholder="Enter companion name eg. Smartestking"  {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-          <FormField
-          control={form.control}
-          name="subject"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Subject</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter Subject eg. Accounting" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      
           <FormField
           control={form.control}
           name="learn"
@@ -143,7 +129,7 @@ const Register = () => {
             <FormItem>
               <FormLabel>What do you want to learn?</FormLabel>
               <FormControl>
-                <Input placeholder="What are you willing to learn" {...field} />
+                <Input placeholder="What are you willing to learn" {...field}  />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -208,7 +194,7 @@ const Register = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-sky-900 hover:bg-sky-400 w-full cursor-pointer">Register Companion</Button>
+        <Button disabled={loading} type="submit" className="bg-sky-900 hover:bg-sky-400 w-full cursor-pointer">Register Companion {loading && <Loader2 className="animate-spin size-4 "/> </Button>
       </form>
     </Form>
     </div>
