@@ -40,4 +40,9 @@ export const courses =[
 
 ]
 
+interface getCompanions {
+    limit?: number 
+    page: number
+}
+
 

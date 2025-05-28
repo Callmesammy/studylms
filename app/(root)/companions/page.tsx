@@ -1,4 +1,4 @@
-const Compannions = () => {
+const Companions = () => {
     return (
         <div>
             Documents 
@@ -6,4 +6,4 @@ const Compannions = () => {
       );
 }
  
-export default Compannions;
+export default Companions;

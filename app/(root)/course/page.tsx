@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -27,9 +26,15 @@ import { useState } from "react"
 import { CiImageOn } from "react-icons/ci";
 import Image from "next/image"
 import { Loader2 } from "lucide-react"
+import { createClient } from "@/utils/supabase/client"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+import insertCompanion from "./actions"
 
-const formSchema = z.object({
-  icon: z.object({}),
+ export const formSchema = z.object({
+  icon: z.string().min(1, {
+    message: "fix"
+  }),
   name: z.string().min(4 ,{
     message: "Enter name"
   }),
@@ -37,37 +42,53 @@ const formSchema = z.object({
     message: "pic an image"
   }),
   mins: z.coerce.number().min(1 ,{
-    message: "pic an image"
+    message: "number of mins"
   }),
   course: z.string().min(1 ,{
-    message: "pic an image"
+    message: "name of course"
   }), 
    style: z.string().min(1 ,{
-    message: "pic an image"
+    message: "Lecture style"
   }),
 })
+
 const Register = () => {
   const [loading, setLoading] = useState(false)
   const [showImage, setshowImage] = useState<string | null>(null)
-
+const router = useRouter()
     // 1. Define your form.
+
     const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        icon: "",
       },
     })
-   
+  
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
+     async function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true)
-      // Do something with the form values.
-      // ✅ This will be type-safe and validated.
+      // supabase createclient 
+
+        try{
+          const companions = await insertCompanion(values)
+          if(companions){
+            router.push("/companions")
+            toast.success("Companion created successfully")
+          }else{ 
+            console.error("something went wrong")
+          }
+        
+         
+        }catch (error){
+          console.error("Something went wrong", error)
+        } finally{
+          setLoading(false)
+        }
       console.log(values)
     }
 
   return (  
-    <div className="w-full pt-3 shadow-md flex-col space-y-3 flex border rounded-md bg-white p-2 items-center justify-center h-screen">
+    <div className="w-full px-2 pt-3 shadow-md flex-col space-y-3 flex border rounded-md bg-white p-2 items-center justify-center h-screen">
       <h1 className="font-semibold text-xl capitalize">Register a course </h1>
 
       
@@ -91,13 +112,20 @@ const Register = () => {
             <FormItem>
               <FormLabel>Compannion icon</FormLabel>
               <FormControl>
-                <Input accept="image/*" type="file" placeholder="shadcn" 
+                <Input disabled={loading} accept="image/*" type="file" placeholder="shadcn" 
                   onChange={(e)=>{
                     const file = e.target.files?.[0]
                     if (file){
                       const url = URL.createObjectURL(file)
                       setshowImage(url)
                       field.onChange(file)
+                      
+                      const read = new FileReader()
+                      read.onloadend = () =>{
+                        const based = read.result as string;
+                        field.onChange(based)
+                      }
+                      read.readAsDataURL(file)
                     }
                   }}
                 />
@@ -115,7 +143,7 @@ const Register = () => {
             <FormItem>
               <FormLabel>Companion name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter companion name eg. Smartestking"  {...field} />
+                <Input disabled={loading} placeholder="Enter companion name eg. Smartestking"  {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -129,7 +157,7 @@ const Register = () => {
             <FormItem>
               <FormLabel>What do you want to learn?</FormLabel>
               <FormControl>
-                <Input placeholder="What are you willing to learn" {...field}  />
+                <Input disabled={loading} placeholder="What are you willing to learn" {...field}  />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -142,7 +170,7 @@ const Register = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Subjects</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select disabled={loading} onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select course" />
@@ -165,10 +193,10 @@ const Register = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Speaking style</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select disabled={loading} onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select your speaking styke" className="w- flex flex-col w-[16rem]"/>
+                    <SelectValue  placeholder="Select your speaking styke" className="flex flex-col w-[16rem]"/>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -188,13 +216,13 @@ const Register = () => {
             <FormItem>
               <FormLabel>how many minutes</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="how many minutes" {...field} />
+                <Input disabled={loading} type="number" placeholder="how many minutes" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button disabled={loading} type="submit" className="bg-sky-900 hover:bg-sky-400 w-full cursor-pointer">Register Companion {loading && <Loader2 className="animate-spin size-4 "/> </Button>
+        <Button disabled={loading} type="submit" className="bg-sky-900 hover:bg-sky-400 w-full cursor-pointer">Register Companion {loading && <Loader2 className="animate-spin size-4 "/> }</Button>
       </form>
     </Form>
     </div>
