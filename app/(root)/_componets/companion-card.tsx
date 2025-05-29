@@ -1,6 +1,4 @@
 import * as React from "react"
-
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -60,7 +58,7 @@ export function AddCompannion({
             <h2 className=" text-md">Topic: {topic}</h2>
             <div className="flex space-x-2 items-center">
             <IoTimerOutline />
-            <h1 className="text-sm">{time} {duration}</h1>
+            <h1 className="text-sm">{time} mins durations</h1>
             </div>
             </div>
             <div className="pt-5">
