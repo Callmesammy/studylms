@@ -30,6 +30,8 @@ import { createClient } from "@/utils/supabase/client"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import insertCompanion from "./actions"
+import { time } from "console"
+
 
  export const formSchema = z.object({
   icon: z.string().min(1, {
@@ -38,10 +40,10 @@ import insertCompanion from "./actions"
   name: z.string().min(4 ,{
     message: "Enter name"
   }),
-  learn: z.string().min(1 ,{
+  topic: z.string().min(1 ,{
     message: "pic an image"
   }),
-  mins: z.coerce.number().min(1 ,{
+  time: z.coerce.number().min(1 ,{
     message: "number of mins"
   }),
   course: z.string().min(1 ,{
@@ -152,7 +154,7 @@ const router = useRouter()
       
           <FormField
           control={form.control}
-          name="learn"
+          name="topic"
           render={({ field }) => (
             <FormItem>
               <FormLabel>What do you want to learn?</FormLabel>
@@ -211,7 +213,7 @@ const router = useRouter()
         />
           <FormField
           control={form.control}
-          name="mins"
+          name="time"
           render={({ field }) => (
             <FormItem>
               <FormLabel>how many minutes</FormLabel>

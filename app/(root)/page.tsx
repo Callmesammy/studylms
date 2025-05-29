@@ -1,9 +1,6 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import {  courses } from "./_componets";
-import { CiBookmark } from "react-icons/ci";
-import { IoTimerOutline } from "react-icons/io5";
 import { MdOutlineScience } from "react-icons/md";
 import { FaCalculator } from "react-icons/fa";
 import { PiChatsTeardropDuotone } from "react-icons/pi";
@@ -84,12 +81,28 @@ export default function Home() {
     <div className="w-full h-full flex pt-3 px-3 mb-3  "> 
     <div className="flex w-full h-full flex-col ">
        <h1 className="text-2xl font-bold">Dashboard</h1>
- <div className="grid md:grid-cols-2 lg:grid-cols-3 w-full h- lg:h-[17rem] gap-2 p-4 ">
+ <div className="grid md:grid-cols-2 lg:grid-cols-3 w-full gap-2 p-4 ">
        <AddCompannion  id= {1} course ="Science" name= "Neura the Brainy Explorer" topic= "Neural Network of the Brain" time={45} duration= "mins durations" colour= "bg-purple-300"      /> 
+       <AddCompannion   id= {2}
+    course ="Maths" 
+    name="Countsy the Number Wizard" 
+    topic="Derivatives & Integrals"
+    time={30}
+    duration="mins durations"
+    colour= "bg-yellow-300"     /> 
+       <AddCompannion  id= {3}
+    course= "Language" 
+    name="Verba the Vocabulary Builder"
+    topic= "English Literature"
+    time= {35}
+    duration= "mins durations"
+    colour= "bg-sky-300"/> 
+
+    
       </div>
       
-     <div className="grid md:grid-cols-2 gap-2 w-full h-full">
-     <div className="w-full lg:w-[40rem] relative h-full justify-center  border rounded-full bg-black text-white ">
+     <div className="grid md:grid-cols-2 gap-2 w-full ">
+     <div className="w-full relative h-full justify-center  border rounded-full bg-black text-white ">
          <div className="w-full absolute h-full bg-orange-300/10 flex"/>
          <div className="flex items-center z-10 w-full h-full justify-center flex-col space-y-2">
           <Link href={"/course"} className="p-2 z-30 rounded text-sm bg-orange-800 hover:bg-orange-400 cursor-pointer">Start learning your way</Link>
@@ -100,7 +113,7 @@ export default function Home() {
 
           </div>
          </div>
-        <div className="border p-2 rounded-md w-full lg:w-[43rem] ">
+        <div className="border p-2 rounded-md w-full  ">
           <h1 className="text-md font-bold">Recently Completed Lessons</h1>
           <div className="w-full justify-between h-full   ">
            <span className="space-y-3 pt-3 w-full flex flex-col justify-between">
@@ -118,8 +131,8 @@ export default function Home() {
 
               return(
                 <Link href={`/course${dt.id}`} key={dt.id} className="w-full flex gap-2 hover:bg-sky-200  space-y-2 items-center">
-                   <span className={`"flex p-2 rounded bg w-full" ${dt.colour}`}> {dt.icon} </span> 
-                  <div className="w-full flex justify-between gap-5">
+                   <span className={`flex p-2 rounded  ${dt.colour}`}> {dt.icon} </span> 
+                  <div className="w-full flex justify-between gap-5 flex-wrap">
                     <span className="flex flex-col w-full ">
                         <h1 className="font-semibold">{dt.name} </h1>
                       <h2 className=" text-sm">Topic: {dt.topic}</h2>
@@ -127,7 +140,7 @@ export default function Home() {
                   
 
                     </div>
-                    <span className="flex gap-2 w- justify-center ">
+                    <span className="flex gap-2 justify-center ">
                     <span className="p-2 border rounded-full w-full items-center  text-sm text-white bg-black font-semibold text-end">
                       {dt.course}
                     </span>

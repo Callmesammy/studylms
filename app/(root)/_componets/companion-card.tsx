@@ -4,10 +4,7 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 
 import { IoTimerOutline } from "react-icons/io5"
@@ -16,6 +13,7 @@ import { CiBookmark } from "react-icons/ci"
 
 interface cardProps {
     id?: number,
+    icon?: string,
     course?: string,
     name?: string,
     topic?: string, 
@@ -28,6 +26,7 @@ interface cardProps {
 }
 export function AddCompannion({
     id,
+    icon,
     course,
     name,
     topic,
@@ -39,9 +38,16 @@ export function AddCompannion({
 
 }: cardProps) {
   return (
-    <Card className={`"w-[350px] border border-black " ${colour}`}>
+    <Card className={`"w-[350px] border border-black  " ${colour}`}>
      
       <CardContent>
+        {icon ?( <div>
+                    <img src={icon} alt="icon" width={100} height={90} className="rounded-md"/>
+        </div>):(
+            <div>
+
+            </div>
+        )}
       <div key={id} className={`"flex  rounded-lg px-3 " ${colour}`}>
             <div className="justify-between w-full px-4 pt-6 flex ">
               <span className="bg-black text-white text-sm p-2 rounded">{course}</span>
