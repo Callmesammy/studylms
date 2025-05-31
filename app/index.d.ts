@@ -40,13 +40,7 @@ export const courses =[
 
 ]
 
-interface getCompanions {
-    limit?: number;
-    page?: number;
-    subject?: string;
-    topic?: string
-
-}
+in
 
 
 interface ZMprops{

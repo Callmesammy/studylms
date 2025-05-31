@@ -29,7 +29,6 @@ export function AddCompannion({
     name,
     topic,
     time,
-    duration,
     bookmark,
     lunch,
     colour,

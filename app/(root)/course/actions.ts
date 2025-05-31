@@ -21,4 +21,10 @@ export default async function insertCompanion(formData: z.infer<typeof formSchem
         success: !error,
         data: data
     }
+
+}
+
+
+export  const getDocuments = async ()=>{
+    
 }
