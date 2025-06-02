@@ -1,4 +1,4 @@
-import { icons } from "lucide-react"
+import { icons, Key } from "lucide-react"
 
 export const courses =[
     {
@@ -40,8 +40,16 @@ export const courses =[
 
 ]
 
-in
+interface getComponents {
+    page: number; 
+    limit: number;
+    topic: string | string;
+    subject: string | string;
+}
 
+interface searchParams{
+   searchParams: Promise<{ [key: string]: string | stringp}>
+}
 
 interface ZMprops{
     id?: number,

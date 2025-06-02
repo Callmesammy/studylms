@@ -1,25 +1,18 @@
 "use client"
-import { createClient } from "@/utils/supabase/client";
-import { useEffect, useState } from "react";
-import { AddCompannion } from "../_componets/companion-card";
-import { Skeleton } from "@/components/ui/skeleton";
+
+import { searchParams } from "@/app";
+import { getComponenting } from "../course/actions";
 
 
-interface ZMprops{
-    id?: number,
-    course?: string,
-    learn?: string,
-    topic?: string, 
-    mins?: number,
-    duration?: string,
-    bookmark?: ()=> {}, 
-    lunch?: ()=> {}, 
-    colour?: string
-}
-const Companions = () => {
+const Companions = async ({searchParams}:searchParams) => {
+const filter = await searchParams;
 
+const subject = filter.subject ? filter.subject :  " ";
+const topic = filter.topic? filter.topic : " ";
 
-    return (
+const companion = await getComponenting({ subject, topic });
+console.log(companion)
+return (
        <div>
         docue
         </div>
