@@ -16,6 +16,8 @@ const CompanionDocuments = async ({searchParams}: searchParams) => {
 
             <div className="flex gap-4">
               <SearchHere/>
+              <FilterInput/>
+
             </div>
              <div className="grid h- md:grid-cols-2 lg:grid-cols-3 gap-2  w-full   ">
               {users.map((companions)=>(

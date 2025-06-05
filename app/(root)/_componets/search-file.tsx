@@ -1,37 +1,48 @@
-"use client"
-
+"use client";
 import { Input } from "@/components/ui/input";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import { formUrlQuery } from '../../../node_modules/@jsmastery/utils/dist/index';
+import { formUrlQuery, removeKeysFromUrlQuery } from "@jsmastery/utils";
 
 const SearchHere = () => {
-    const searchParams = useSearchParams()
-    const router = useRouter()
-    const pathName = usePathname()
+  const params = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const query = searchParams.get("topic") ?? " ";
+  const [searchQuery, setSearchQuery] = useState("");
 
-    const query = searchParams.get('topic') || ''
+  useEffect(() => {
+    setTimeout(() => {
+      if (searchQuery) {
+        const newUrl = formUrlQuery({
+          params: searchParams.toString(),
+          key: "topic",
+          value: searchQuery,
+        });
+        router.push(newUrl, { scroll: false });
+      } else {
+        const newUrl = removeKeysFromUrlQuery({
+          params: searchParams.toString(),
+          keysToRemove: ["topic"],
+        });
 
-    const [searchQuery, setSearchQuery] = useState("")
+        router.push(newUrl, { scroll: false });
+      }
+    }, 5000);
+  }, [params, router, searchParams, searchQuery]);
+  return (
+    <div className="w-52 p-1 items-center  gap-1 rounded-md border flex">
+      <CiSearch className="size-7" />
 
-    useEffect(()=>{
-        if(searchQuery){
-            const newUrl = formUrlQuery({
-                params: searchParams.toString(),
-                key: "topic",
-                value: searchQuery,
-              });
-              
-              router.push(newUrl, {scroll: false});
-        }
-    },[searchParams, router, pathName, searchQuery]);
-    return ( 
-        <div className="w-42 md:w-62 border rounded-lg flex p-2 items-center gap-1">
-        <CiSearch className="size-5"/>
-        <Input value={searchQuery} onChange={(e)=> setSearchQuery(e.target.value)} placeholder="Search here....." className="italic text-sm w-full h-full border-0"/>
+      <Input
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="search here..."
+        className="text-sm italics border-0"
+      />
     </div>
-     );
-}
- 
+  );
+};
+
 export default SearchHere;

@@ -35,7 +35,7 @@ export function AddCompannion({
 
 }: cardProps) {
   return (
-    <Card className={`"w-[350px] border border-black  " ${colour}`}>
+    <Card className={`"w-[350px] border border-black  " ${course === "management" ? "bg-green-300" : course === "accounting" ? "bg-pink-300" : course === "costing" ? "bg-sky-300" : course === "maths" && "bg-red-300" }`}>
      
       <CardContent>
         {icon ?( <div>
@@ -45,7 +45,7 @@ export function AddCompannion({
 
             </div>
         )}
-      <div key={id} className={`"flex  rounded-lg px-3 " ${colour}`}>
+      <div key={id} className={`"flex  rounded-lg px-3 " ${course === "management" ? "bg-green-300" : course === "accounting" ? "bg-pink-300" : course === "costing" ? "bg-sky-300" : course === "maths" && "bg-red-300" }`}>
             <div className="justify-between w-full px-4 pt-6 flex ">
               <span className="bg-black text-white text-sm p-2 rounded">{course}</span>
             

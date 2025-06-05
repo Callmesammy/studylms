@@ -181,6 +181,8 @@ const router = useRouter()
                   <SelectItem value="costing">Cost Accounting</SelectItem>
                   <SelectItem value="accounting">Financial Accounting</SelectItem>
                   <SelectItem value="management">Management Account</SelectItem>
+                  <SelectItem value="maths">Mathematics</SelectItem>
+
                 </SelectContent>
               </Select>
               <FormMessage />
