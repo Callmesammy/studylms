@@ -40,15 +40,33 @@ export const courses =[
 
 ]
 
+
+// type User = {
+//   name: string;
+//   email: string;
+//   image?: string;
+//   accountId: string;
+// };
+
+  interface CompanionComponentProps {
+    companionId: string;
+    subject: string;
+    topic: string;
+    name: string;
+    userName: string;
+    userImage: string;
+    voice: string;
+    style: string;
+  }
 interface getComponents {
-    page: number; 
-    limit: number;
-    topic: string | string;
-    subject: string | string;
+    page?: number; 
+    limit?: number;
+    topic?: string | string;
+    course?: string | string;
 }
 
 interface searchParams{
-   searchParams: Promise<{ [key: string]: string | stringp}>
+   searchParams: Promise<{ [key: string]: string | string}>
 }
 
 interface ZMprops{

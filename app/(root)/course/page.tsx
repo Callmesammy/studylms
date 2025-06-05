@@ -26,11 +26,9 @@ import { useState } from "react"
 import { CiImageOn } from "react-icons/ci";
 import Image from "next/image"
 import { Loader2 } from "lucide-react"
-import { createClient } from "@/utils/supabase/client"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import insertCompanion from "./actions"
-import { time } from "console"
 
 
  export const formSchema = z.object({
@@ -72,8 +70,9 @@ const router = useRouter()
       // supabase createclient 
 
         try{
-          const companions = await insertCompanion(values)
-          if(companions){
+
+          const companion = await insertCompanion(values)
+          if(companion){
             router.push("/companions")
             toast.success("Companion created successfully")
           }else{ 

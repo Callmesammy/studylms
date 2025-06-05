@@ -1,44 +1,14 @@
-"use client"
-
+"use server"
 import {  z } from "zod"
 import { formSchema } from "./page"
-import { createClient } from "@/utils/supabase/client"
-import { getComponents } from "@/app"
+import { db } from "@/drizzle/src";
+import { usersTable } from "@/drizzle/db/schema";
 
-interface file {
-    error: null| string, 
-    success: boolean, 
-    data: unknown | null
-}
-
-export default async function insertCompanion(formData: z.infer<typeof formSchema>): Promise<file>{
-   
+export default async function insertCompanion(formData: z.infer<typeof formSchema>){
+ const result = await db.insert(usersTable).values({...formData, createdAt: new Date()}).returning()
   
-    const supabase = await createClient()
-    const {data, error} = await supabase.from("companion").insert({...formData})
-  
-    return {
-        error: error?.message || "Something went wrong", 
-        success: !error,
-        data: data
-    }
+  return result; 
 
 }
 
-export async function getComponenting({limit = 10, page =1, topic, subject}: getComponents) {
-   const supabase = await createClient()
-   let query = supabase.from("companion").select()
-   if(topic && subject){
-    query = query.ilike("select", `${subject}%`)
-    .or(`topic.ilike.%${topic}%,name.ilike.%${topic}%`)  
-}  else if(subject){
-    query = query.ilike("subject", `${subject}%`)
-}else if(topic){
-    query = query.or(`topic.ilike.%${topic}%,name.ilike.%${topic}%`)
-}
-query = query.range((page -1) * limit, page * limit -1 )
 
-const {data: companion, error} = await supabase.from("companion").select()
-if(!companion){throw new Error(error.message)}
-return companion;
-}
