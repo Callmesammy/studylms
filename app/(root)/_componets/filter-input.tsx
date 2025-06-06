@@ -16,11 +16,10 @@ const FilterInput = () => {
     const params = useParams()
     const searchParams = useSearchParams()
     const router = useRouter()
-    const query = searchParams.get('course')?? " ";
+    const query = searchParams.get('course') || " ";
     const [queryChange, setQueryChange] = useState("")
    
     useEffect(()=>{
-      setTimeout(()=>{
         if(queryChange){
             const newUrl = formUrlQuery({
                 params: searchParams.toString(),
@@ -37,7 +36,6 @@ const FilterInput = () => {
               
               router.push(newUrl, { scroll: false });
         }
-      },2000)  
     },[params, searchParams, router, queryChange])
    
     return ( 

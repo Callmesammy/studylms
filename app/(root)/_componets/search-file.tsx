@@ -1,15 +1,15 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {  usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { formUrlQuery, removeKeysFromUrlQuery } from "@jsmastery/utils";
 
 const SearchHere = () => {
-  const params = useParams();
+  const pathName = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const query = searchParams.get("topic") ?? " ";
+  const query = searchParams.get("topic") || " ";
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -22,15 +22,18 @@ const SearchHere = () => {
         });
         router.push(newUrl, { scroll: false });
       } else {
+        if(pathName === '/companion'){
         const newUrl = removeKeysFromUrlQuery({
           params: searchParams.toString(),
           keysToRemove: ["topic"],
         });
 
         router.push(newUrl, { scroll: false });
-      }
+      }     
+        }
+       
     }, 5000);
-  }, [params, router, searchParams, searchQuery]);
+  }, [pathName, router, searchParams, searchQuery]);
   return (
     <div className="w-52 p-1 items-center  gap-1 rounded-md border flex">
       <CiSearch className="size-7" />

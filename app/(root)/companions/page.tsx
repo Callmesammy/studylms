@@ -9,7 +9,7 @@ import { AddCompannion } from "../_componets/companion-card";
 
 const CompanionDocuments = async ({searchParams}: searchParams) => {
     
-        const users = await db.select().from(usersTable);
+        const users = (await db.select().from(usersTable));
      return (
         <div className="w-full flex mb-3 flex-col space-y-2.5 bg-white px-2">
             <h1 className="font-semibold text-2xl text-pretty">Companion Library</h1>
