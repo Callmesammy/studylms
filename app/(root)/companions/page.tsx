@@ -7,7 +7,7 @@ import { AddCompannion } from "../_componets/companion-card";
 
 
 
-const CompanionDocuments = async ({searchParams}: searchParams) => {
+const CompanionDocuments = async () => {
     
         const users = (await db.select().from(usersTable));
      return (
