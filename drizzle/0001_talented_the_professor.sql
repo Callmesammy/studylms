@@ -1,0 +1,1 @@
+ALTER TABLE "companion" ADD CONSTRAINT "companion_id_unique" UNIQUE("id");
