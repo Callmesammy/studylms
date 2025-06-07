@@ -65,7 +65,7 @@ export function AddCompannion({
           </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-                   <Link href={`/course${id}`} onClick={lunch} className=" px-4 w-full bg-red-500 p-2 flex items-center rounded-md text-center hover:bg-red-700 justify-center text-md font-semibold text-white">Launch Lesson</Link>
+                   <Link href={`/course/${id}`} onClick={lunch} className=" px-4 w-full bg-red-500 p-2 flex items-center rounded-md text-center hover:bg-red-700 justify-center text-md font-semibold text-white">Launch Lesson</Link>
 
       </CardFooter>
     </Card>

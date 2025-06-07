@@ -101,7 +101,7 @@ export default function Home() {
     
       </div>
       
-     <div className="grid md:grid-cols-2 gap-2 w-full ">
+     <div className="grid md:grid-cols-[1fr_2fr] gap-2 w-full ">
      <div className="w-full relative h-full justify-center  border rounded-full bg-black text-white ">
          <div className="w-full absolute h-full bg-orange-300/10 flex"/>
          <div className="flex items-center z-10 w-full h-full justify-center flex-col space-y-2">
@@ -109,7 +109,7 @@ export default function Home() {
           <h1 className="text-md font-semibold text-2xl">Build a Personalize <br/>  learning companion</h1>
           <p className="px-4 text-muted-foreground text-sm text-center">pick a name, subject, voice & personality and start learning through <br/> voice conversations that feel natural and fun </p>
           <Image src="/305.jpg" alt="pic" width={170} height={105} className="object-contain rounded-full flex"/>
-          <Link href={"/course"} className="p-2 z-30 rounded text-sm bg-sky-800 hover:bg-sky-400 cursor-pointer  px-auto text-center w-[13rem] flex gap-1 items-center justify-center"> <GoPlus /> Build New Companion</Link>
+          <Link href={"/course"} className="p-2 font-semibold z-30 rounded text-sm bg-sky-600 hover:bg-sky-400 cursor-pointer  px-auto text-center w-[13rem] flex gap-1 items-center justify-center"> <GoPlus /> Build New Companion</Link>
 
           </div>
          </div>
@@ -130,7 +130,7 @@ export default function Home() {
             {anotherCourse.map((dt)=>{
 
               return(
-                <Link href={`/course${dt.id}`} key={dt.id} className="w-full flex gap-2 hover:bg-sky-200  space-y-2 items-center">
+                <Link href={`/course/${dt.id}`} key={dt.id} className="w-full flex gap-2 hover:bg-sky-200  space-y-2 items-center">
                    <span className={`flex p-2 rounded  ${dt.colour}`}> {dt.icon} </span> 
                   <div className="w-full flex justify-between gap-5 flex-wrap">
                     <span className="flex flex-col w-full ">
