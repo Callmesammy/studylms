@@ -3,18 +3,10 @@ import { usersTable } from "@/drizzle/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { FaRepeat } from "react-icons/fa6";
-import Lottie from "lottie-react";
 import LaunchCourse from "../../_componets/launch-course";
 
-enum statusCall {
-  CONNECTING = 'CONNECTING', 
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE'
-}
-const Compan = async ({ params }: { params: { id: number } }) => {
 
+const Compan = async ({ params }: { params: { id: number } }) => {
 
   const result = await db
     .select()
@@ -55,7 +47,8 @@ const Compan = async ({ params }: { params: { id: number } }) => {
         <Image src={user.icon} alt="images" width={100} height={55} className="border  rounded-md p-2 shadow"/>
         <h1 className="text-lg md:text-2xl font-bold">user</h1>
           </div>
-         <LaunchCourse/>
+         <LaunchCourse id={user} />
+
         </div>
      </div>
     </div>
