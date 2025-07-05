@@ -7,11 +7,12 @@ import LaunchCourse from "../../_componets/launch-course";
 
 
 const Compan = async ({ params }: { params: { id: string; } }) => {
+  const id = Number(params.id);          // or parseInt(params.id, 10)
 
   const result = await db
     .select()
     .from(usersTable)
-    .where(eq(usersTable.id, 10)); // ✅ string to string
+    .where(eq(usersTable.id, id)); // ✅ string to string
 
   const user = result[0];
 
