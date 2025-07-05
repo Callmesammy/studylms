@@ -6,7 +6,7 @@ import Image from "next/image";
 import LaunchCourse from "../../_componets/launch-course";
 
 
-const Compan = async ({ params }: { params: { id: number } }) => {
+const Compan = async ({ params }: { params: { id: string } }) => {
 
   const result = await db
     .select()
