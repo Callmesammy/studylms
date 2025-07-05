@@ -13,15 +13,15 @@ type Props = {
 };
 
 const Compan = async ({ params }: Props) => {
-  const id = Number(params.id);          // or parseInt(params.id, 10)
+  const id = Number(params.id);
+  if (Number.isNaN(id)) return notFound();
 
   const result = await db
     .select()
     .from(usersTable)
-    .where(eq(usersTable.id, id)); // ✅ string to string
+    .where(eq(usersTable.id, id));
 
   const user = result[0];
-
   if (!user) return notFound();
 
 
