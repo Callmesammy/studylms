@@ -6,7 +6,13 @@ import Image from "next/image";
 import LaunchCourse from "../../_componets/launch-course";
 
 
-const Compan = async ({ params }: { params: { id: string; } }) => {
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+const Compan = async ({ params }: Props) => {
   const id = Number(params.id);          // or parseInt(params.id, 10)
 
   const result = await db
