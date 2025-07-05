@@ -89,7 +89,7 @@ const LaunchCourse = ({id}: {id?: any}) => {
         const data = await res.json();
         const assistantId = data.id;
       
-        vapi.start({ assistantId });
+        vapi.start(assistantId);
       };
       
 
