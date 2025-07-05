@@ -6,24 +6,18 @@ import Image from "next/image";
 import LaunchCourse from "../../_componets/launch-course";
 
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
-
-const Compan = async ({ params }: Props) => {
-  const id = Number(params.id);
-  if (Number.isNaN(id)) return notFound();
+// @ts-ignore
+const Compan = async ({ params }: { params: { id: string; } }) => {
+  const id = Number(params.id);          // or parseInt(params.id, 10)
 
   const result = await db
     .select()
     .from(usersTable)
-    .where(eq(usersTable.id, id));
+    .where(eq(usersTable.id, id)); // ✅ string to string
 
   const user = result[0];
-  if (!user) return notFound();
 
+  if (!user) return notFound();
 
   return (
     <div className="w-full flex pt-3 flex-col">

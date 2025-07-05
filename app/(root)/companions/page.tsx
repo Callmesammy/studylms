@@ -1,6 +1,5 @@
 import SearchHere from "../_componets/search-file";
 import FilterInput from "../_componets/filter-input";
-import { searchParams } from "@/app";
 import { usersTable } from "@/drizzle/db/schema";
 import { db } from "@/drizzle/src";
 import { AddCompannion } from "../_componets/companion-card";
